@@ -1,11 +1,13 @@
 import { Header } from "./Header";
 import { PortfolioPage } from "./PortfolioPage";
 import { Footer } from "./Footer";
+import { LoginPage } from "./LoginPage";
 
 function App() {
   return (
     <div>
       <Header />
+      <LoginPage />
       <PortfolioPage />
       <Footer />
     </div>
