@@ -1,6 +1,7 @@
-import { PortfolioIndex } from "./PortfolioIndex"
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { PortfolioIndex } from "./PortfolioIndex"
+import { TransactionNew } from "./TransactionNew";
 
 export function PortfolioPage() {
   const [assets, setAssets] = useState([]);
@@ -13,12 +14,21 @@ export function PortfolioPage() {
     });
   };
 
+  const handleCreate = (params, succesCallback) => {
+    console.log("handleCreate", params);
+    axios.post("http://localhost:3000/transactions.json", params).then((response) => {
+      setAssets([...assets, response.data]);
+      succesCallback();
+    });
+  };
+
   useEffect(handleIndex, []);
 
   return (
     <main>
       <h1>Welcome to React!</h1>
       <PortfolioIndex assets={assets}/>
+      <TransactionNew onCreate={handleCreate}/>
     </main>
   );
 }
