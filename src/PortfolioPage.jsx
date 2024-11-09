@@ -18,11 +18,12 @@ export function PortfolioPage() {
     });
   };
 
-  const handleCreate = (params, succesCallback) => {
+  const handleCreate = (params, successCallback) => {
     console.log("handleCreate", params);
     axios.post("http://localhost:3000/transactions.json", params).then((response) => {
       setTransactions([...transactions, response.data]);
-      succesCallback();
+      console.log(response.data);
+      successCallback();
     });
   };
 

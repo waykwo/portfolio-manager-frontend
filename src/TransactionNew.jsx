@@ -15,8 +15,8 @@ export function TransactionNew({ onCreate }) {
           <input name="ticker" type="text" />
         </div> */}
         <div>
-          <label htmlFor="financial_asset">Asset</label>
-          <input name="financial_asset" type="number" />
+          <label htmlFor="financial_asset_id">Asset</label>
+          <input name="financial_asset_id" type="number" />
         </div>
         <div>
           <label htmlFor="shares">Shares</label>
