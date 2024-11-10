@@ -18,11 +18,11 @@ export function TransactionShow({ transaction, onUpdate }) {
         <h3>Update</h3>
         <div>
           <label htmlFor="shares">Shares</label>
-          <input name="shares" type="number" />
+          <input name="shares" type="decimal" />
         </div>
         <div>
           <label htmlFor="cost_per_share">Cost Per Share</label>
-          <input name="cost_per_share" type="number" />
+          <input name="cost_per_share" type="decimal" />
         </div>
         <div>
           <label htmlFor="trade_date">Trade Date</label>
