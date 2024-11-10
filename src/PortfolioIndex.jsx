@@ -64,7 +64,7 @@ export function PortfolioIndex({ transactions, onShow }) {
           ))}
         </ul>
 
-        <p>Totals by Asset Class</p>
+        <p>Percentages by Asset Class</p>
         <ul>
           {Object.entries(parsedPercentages).map(([assetClass, percentage]) => (
             <li key={assetClass}>{assetClass}: {percentage}%</li>
