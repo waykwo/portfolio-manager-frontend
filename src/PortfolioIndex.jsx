@@ -4,16 +4,26 @@ export function PortfolioIndex({ transactions, onShow }) {
   return (
     <div>
       <h1>Portfolio</h1>
-      {transactions.map((transaction) => (
-        <div key={transaction.id}>
-          <h2>{transaction.asset_name}</h2>
-          <p>{transaction.asset_ticker}</p>
-          <p>{transaction.shares}</p>
-          <p>{transaction.cost_per_share}</p>
-          <p>{transaction.trade_date}</p>
-          <button onClick={() => onShow(transaction)}>More info</button>
-        </div>
-      ))}
+        <table>
+          <tr>
+            <th>Asset Name</th>
+            <th>Ticker</th>
+            <th>Shares</th>
+            <th>Cost Per Share</th>
+            <th>Trade Date</th>
+            <th>More Info</th>
+          </tr>
+          {transactions.map((transaction) => (
+            <tr key={transaction.id}>
+              <td>{transaction.asset_name}</td>
+              <td>{transaction.asset_ticker}</td>
+              <td>{transaction.shares}</td>
+              <td>{transaction.cost_per_share}</td>
+              <td>{transaction.trade_date}</td>
+              <td><button onClick={() => onShow(transaction)}>&#9432;</button></td>
+            </tr>
+          ))}
+      </table>
     </div>
   );
 }

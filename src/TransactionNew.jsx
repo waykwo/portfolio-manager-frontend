@@ -28,7 +28,7 @@ export function TransactionNew({ onCreate }) {
         </div>
         <div>
           <label htmlFor="trade_date">Trade Date</label>
-          <input name="trade_date" type="text" />
+          <input name="trade_date" type="date" />
         </div>
         <button type="submit">Create</button>
       </form>

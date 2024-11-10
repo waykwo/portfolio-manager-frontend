@@ -38,6 +38,23 @@ export function PortfolioPage() {
     setIsTransactionShowVisible(false);
   };
 
+  const handleUpdate = (id, params, successCallback) => {
+    console.log("handleUpdate", params);
+    axios.patch(`http://localhost:3000/transactions/${id}.json`, params).then((response) => {
+      setTransactions(
+        transactions.map((transaction) => {
+          if (transaction.id === response.data.id) {
+            return response.data;
+          } else {
+            return transaction;
+          }
+        })
+      );
+      successCallback();
+      handleClose();
+    });
+  };
+
   useEffect(handleIndex, []);
 
   return (
@@ -46,8 +63,7 @@ export function PortfolioPage() {
       <PortfolioIndex transactions={transactions} onShow={handleShow} />
       <TransactionNew onCreate={handleCreate}/>
       <Modal show={isTransactionShowVisible} onClose={handleClose} >
-        <h1>Test</h1>
-        <TransactionShow transaction={currentTransaction} />
+        <TransactionShow transaction={currentTransaction} onUpdate={handleUpdate} />
       </Modal>
     </main>
   );
