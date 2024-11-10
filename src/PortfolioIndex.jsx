@@ -54,24 +54,9 @@ export function PortfolioIndex({ transactions, onShow }) {
   return (
     <div>
       <h1>Portfolio</h1>
-        <p>Total Value: {total}</p>
-        {/* <p>Total By Asset Class: {JSON.stringify(totalsJson)}</p>
-        <p>Percentages By Asset Class: {JSON.stringify(percentagesJson)}</p> */}
-        <p>Totals by Asset Class</p>
-        <ul>
-          {Object.entries(parsedTotals).map(([assetClass, total]) => (
-            <li key={assetClass}>{assetClass}: {total.toFixed(2)}</li>
-          ))}
-        </ul>
 
-        <p>Percentages by Asset Class</p>
-        <ul>
-          {Object.entries(parsedPercentages).map(([assetClass, percentage]) => (
-            <li key={assetClass}>{assetClass}: {percentage}%</li>
-          ))}
-        </ul>
-
-        <table>
+      <table>
+        <thead>
           <tr>
             <th>Asset Name</th>
             <th>Ticker</th>
@@ -82,18 +67,58 @@ export function PortfolioIndex({ transactions, onShow }) {
             <th>Asset Class</th>
             <th>More Info</th>
           </tr>
-          {transactions.map((transaction) => (
-            <tr key={transaction.id}>
-              <td>{transaction.asset_name}</td>
-              <td>{transaction.asset_ticker}</td>
-              <td>{transaction.shares}</td>
-              <td>{transaction.cost_per_share}</td>
-              <td>{transaction.subtotal}</td>
-              <td>{transaction.trade_date}</td>
-              <td>{transaction.asset_class}</td>
-              <td><button onClick={() => onShow(transaction)}>Info &#9432;</button></td>
+        </thead>
+        {transactions.map((transaction) => (
+          <tr key={transaction.id}>
+            <td>{transaction.asset_name}</td>
+            <td>{transaction.asset_ticker}</td>
+            <td>{transaction.shares}</td>
+            <td>{transaction.cost_per_share}</td>
+            <td>{transaction.subtotal}</td>
+            <td>{transaction.trade_date}</td>
+            <td>{transaction.asset_class}</td>
+            <td><button onClick={() => onShow(transaction)}>Info &#9432;</button></td>
+          </tr>
+        ))}
+        <tfoot>
+          <th><h2>Total Portfolio Value</h2></th>
+          <td>{total}</td>
+        </tfoot>
+      </table>
+
+      <h3>Totals by Asset Class</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Asset Class</th>
+            <th>Total</th> </tr>
+        </thead>
+        <tbody>
+          {Object.entries(parsedTotals).map(([assetClass, total]) => (
+            <tr key={assetClass}>
+              <td>{assetClass}</td>
+              <td>{total.toFixed(2)}</td>
             </tr>
           ))}
+        </tbody>
+      </table>
+
+      <h3>Percentages by Asset Class</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Asset Class</th>
+            <th>Percentage</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.entries(parsedPercentages).map(([assetClass, percentage]) => (
+            <tr key={assetClass}>
+              <td>{assetClass}</td>
+              <td>{percentage}%</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   );
