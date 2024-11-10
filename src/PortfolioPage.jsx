@@ -9,10 +9,12 @@ export function PortfolioPage() {
   const [transactions, setTransactions] = useState([]);
   const [isTransactionShowVisible, setIsTransactionShowVisible] = useState(false);
   const [currentTransaction, setCurrentTransaction] = useState({});
+  const [assets, setAssets] = useState([]);
 
   const handleIndex = () => {
     console.log("handleIndex");
     axios.get("http://localhost:3000/transactions.json").then((response) => {
+      console.log("Transactions");
       console.log(response.data);
       setTransactions(response.data);
     });
@@ -55,13 +57,23 @@ export function PortfolioPage() {
     });
   };
 
+  const loadAssetsData = () => {
+    console.log("loadAssetData");
+    axios.get("http://localhost:3000/financial_assets.json").then((response) => {
+      console.log("Assets");
+      console.log(response.data);
+      setAssets(response.data);
+    });
+  };
+
   useEffect(handleIndex, []);
+  useEffect(loadAssetsData, []);
 
   return (
     <main>
       <h1>Welcome to React!</h1>
       <PortfolioIndex transactions={transactions} onShow={handleShow} />
-      <TransactionNew onCreate={handleCreate}/>
+      <TransactionNew assets={assets} onCreate={handleCreate}/>
       <Modal show={isTransactionShowVisible} onClose={handleClose} >
         <TransactionShow transaction={currentTransaction} onUpdate={handleUpdate} />
       </Modal>

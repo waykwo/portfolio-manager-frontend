@@ -1,10 +1,9 @@
-export function TransactionNew({ onCreate }) {
+export function TransactionNew({ assets, onCreate }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const params = new FormData(event.target);
     onCreate(params, () => event.target.reset());
   };
-
 
   return (
     <div>
@@ -15,8 +14,15 @@ export function TransactionNew({ onCreate }) {
           <input name="ticker" type="text" />
         </div> */}
         <div>
-          <label htmlFor="financial_asset_id">Asset</label>
-          <input name="financial_asset_id" type="number" />
+          <label htmlFor="financial_asset_id">Select Asset</label>
+          <select name="financial_asset_id" id="financial_asset_id">
+            {assets.map((asset) => (
+              <option key={asset.id} value={asset.id}>{asset.name}</option>
+            ))}
+          </select>
+
+          {/* <label htmlFor="financial_asset_id">Asset</label>
+          <input name="financial_asset_id" type="number" /> */}
         </div>
         <div>
           <label htmlFor="shares">Shares</label>
