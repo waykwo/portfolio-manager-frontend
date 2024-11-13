@@ -1,5 +1,8 @@
+import { useState } from "react";
+
 export function PortfolioIndex({ transactions, onShow }) {
   console.log(transactions)
+  const [selectedAssetClass, setSelectedAssetClass] = useState('All');
 
   // Calculate portfolio total
   const total = transactions.reduce((sum, transaction) => {
@@ -40,9 +43,26 @@ export function PortfolioIndex({ transactions, onShow }) {
   const parsedTotals = JSON.parse(totalsJson);
   const parsedPercentages = JSON.parse(percentagesJson);
 
+  // Get unique asset classes
+  const assetClasses = [
+    'All', ...new Set(transactions.map((transaction) => transaction.asset_class))
+  ];
+  
+  // Filter transactions based on selected asset class
+  const filteredTransactions = selectedAssetClass === 'All'
+  ? transactions
+  : transactions.filter((transaction) => transaction.asset_class === selectedAssetClass);
+
+
   return (
     <div>
       <h1>Portfolio</h1>
+
+      {assetClasses.map((assetClass) => (
+        <button key={assetClass} onClick={
+          () => setSelectedAssetClass(assetClass)}> {assetClass}
+        </button>
+      ))}
 
       <table>
         <thead>
@@ -60,7 +80,7 @@ export function PortfolioIndex({ transactions, onShow }) {
           </tr>
         </thead>
         <tbody>
-          {transactions.map((transaction) => (
+          {filteredTransactions.map((transaction) => (
             <tr key={transaction.id}>
               <td>{transaction.asset_name}</td>
               <td>{transaction.asset_ticker}</td>
