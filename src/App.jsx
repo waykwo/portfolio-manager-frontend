@@ -2,13 +2,15 @@ import { Header } from "./Header";
 import { PortfolioPage } from "./PortfolioPage";
 import { Footer } from "./Footer";
 import { LoginPage } from "./LoginPage";
+import { SignupPage } from "./SignupPage";
 
 function App() {
   let unauthenticatedComponents;
   if (localStorage.jwt === undefined) {
     unauthenticatedComponents = (
       <>
-        <LoginPage />      
+        <LoginPage />
+        <SignupPage />
       </>
     )
   }
