@@ -1,4 +1,5 @@
 export function TransactionShow({ transaction, onUpdate }) {
+  console.log(transaction.id);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -18,18 +19,19 @@ export function TransactionShow({ transaction, onUpdate }) {
         <h3>Update</h3>
         <div>
           <label htmlFor="shares">Shares</label>
-          <input name="shares" type="decimal" />
+          <input name="shares" type="decimal" defaultValue={transaction.shares} />
         </div>
         <div>
           <label htmlFor="cost_per_share">Cost Per Share</label>
-          <input name="cost_per_share" type="decimal" />
+          <input name="cost_per_share" type="decimal" defaultValue={transaction.cost_per_share} />
         </div>
         <div>
           <label htmlFor="trade_date">Trade Date</label>
-          <input name="trade_date" type="date" />
+          <input name="trade_date" type="date" defaultValue={transaction.trade_date} />
         </div>
         <button type="submit">Update</button>
       </form>
+
 
     </div>
   )

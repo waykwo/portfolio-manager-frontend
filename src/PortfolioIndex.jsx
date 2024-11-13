@@ -3,7 +3,7 @@ export function PortfolioIndex({ transactions, onShow }) {
 
   // Calculate portfolio total
   const total = transactions.reduce((sum, transaction) => {
-    return sum + Number(transaction.subtotal);
+    return sum + Number(transaction.book_value);
   }, 0);
 
   // Calculate total by asset class
@@ -12,7 +12,7 @@ export function PortfolioIndex({ transactions, onShow }) {
       if (!result[transaction.asset_class]) {
         result[transaction.asset_class] = 0;
       }
-      result[transaction.asset_class] += Number(transaction.subtotal);
+      result[transaction.asset_class] += Number(transaction.book_value);
       return result;
     }, {}); 
   };
@@ -40,17 +40,6 @@ export function PortfolioIndex({ transactions, onShow }) {
   const parsedTotals = JSON.parse(totalsJson);
   const parsedPercentages = JSON.parse(percentagesJson);
 
-  // const equity_pct = transactions.reduce((sum, transaction) => {
-  //   return sum 
-  // })
-
-  // let total = 0
-  // let subtotal;
-  // transactions.map((transaction) => {
-  //   subtotal = transaction.subtotal;
-  //   total += subtotal;
-  // })
-
   return (
     <div>
       <h1>Portfolio</h1>
@@ -62,27 +51,33 @@ export function PortfolioIndex({ transactions, onShow }) {
             <th>Ticker</th>
             <th>Shares</th>
             <th>Cost Per Share</th>
-            <th>Subtotal</th>
+            <th>Book Value</th>
+            <th>Current Value</th>
+            <th>Gain/Loss</th>
             <th>Trade Date</th>
             <th>Asset Class</th>
             <th>More Info</th>
           </tr>
         </thead>
-        {transactions.map((transaction) => (
-          <tr key={transaction.id}>
-            <td>{transaction.asset_name}</td>
-            <td>{transaction.asset_ticker}</td>
-            <td>{transaction.shares}</td>
-            <td>{transaction.cost_per_share}</td>
-            <td>{transaction.subtotal}</td>
-            <td>{transaction.trade_date}</td>
-            <td>{transaction.asset_class}</td>
-            <td><button onClick={() => onShow(transaction)}>Info &#9432;</button></td>
-          </tr>
-        ))}
+        <tbody>
+          {transactions.map((transaction) => (
+            <tr key={transaction.id}>
+              <td>{transaction.asset_name}</td>
+              <td>{transaction.asset_ticker}</td>
+              <td>{transaction.shares}</td>
+              <td>$ {transaction.cost_per_share}</td>
+              <td>$ {transaction.book_value}</td>
+              <td>$ {transaction.current_value}</td>
+              <td>$ {transaction.gain_loss}</td>
+              <td>{transaction.trade_date}</td>
+              <td>{transaction.asset_class}</td>
+              <td><button onClick={() => onShow(transaction)}>Info &#9432;</button></td>
+            </tr>
+          ))}
+        </tbody>
         <tfoot>
           <th><h2>Total Portfolio Value</h2></th>
-          <td>{total}</td>
+          <td>$ {total.toFixed(2)}</td>
         </tfoot>
       </table>
 
@@ -97,7 +92,7 @@ export function PortfolioIndex({ transactions, onShow }) {
           {Object.entries(parsedTotals).map(([assetClass, total]) => (
             <tr key={assetClass}>
               <td>{assetClass}</td>
-              <td>{total.toFixed(2)}</td>
+              <td>$ {total.toFixed(2)}</td>
             </tr>
           ))}
         </tbody>
@@ -115,7 +110,7 @@ export function PortfolioIndex({ transactions, onShow }) {
           {Object.entries(parsedPercentages).map(([assetClass, percentage]) => (
             <tr key={assetClass}>
               <td>{assetClass}</td>
-              <td>{percentage}%</td>
+              <td>{percentage} %</td>
             </tr>
           ))}
         </tbody>

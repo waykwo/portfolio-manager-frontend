@@ -7,8 +7,8 @@ function App() {
   return (
     <div>
       <Header />
-      <LoginPage />
       <PortfolioPage />
+      <LoginPage />
       <Footer />
     </div>
   )

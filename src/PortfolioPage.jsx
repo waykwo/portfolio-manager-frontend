@@ -71,7 +71,6 @@ export function PortfolioPage() {
 
   return (
     <main>
-      <h1>Welcome to React!</h1>
       <PortfolioIndex transactions={transactions} onShow={handleShow} />
       <TransactionNew assets={assets} onCreate={handleCreate}/>
       <Modal show={isTransactionShowVisible} onClose={handleClose} >
