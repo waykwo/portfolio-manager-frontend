@@ -8,6 +8,7 @@ import { Modal } from "./Modal";
 export function PortfolioPage() {
   const [transactions, setTransactions] = useState([]);
   const [isTransactionShowVisible, setIsTransactionShowVisible] = useState(false);
+  const [isTransactionNewVisible, setIsTransactionNewVisible] = useState(false);
   const [currentTransaction, setCurrentTransaction] = useState({});
   const [assets, setAssets] = useState([]);
 
@@ -35,9 +36,14 @@ export function PortfolioPage() {
     setCurrentTransaction(transaction);
   };
 
+  const handlePurchaseAsset = () => {
+    setIsTransactionNewVisible(true);
+  };
+
   const handleClose = () => {
     console.log("handleClose");
     setIsTransactionShowVisible(false);
+    setIsTransactionNewVisible(false);
   };
 
   const handleUpdate = (id, params, successCallback) => {
@@ -71,8 +77,11 @@ export function PortfolioPage() {
 
   return (
     <main>
+      <button onClick={handlePurchaseAsset}>Purchase Asset</button>
       <PortfolioIndex transactions={transactions} onShow={handleShow} />
-      <TransactionNew assets={assets} onCreate={handleCreate}/>
+      <Modal show={isTransactionNewVisible} onClose={handleClose} >
+        <TransactionNew assets={assets} onCreate={handleCreate}/>
+      </Modal>
       <Modal show={isTransactionShowVisible} onClose={handleClose} >
         <TransactionShow transaction={currentTransaction} onUpdate={handleUpdate} />
       </Modal>
