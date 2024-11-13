@@ -65,10 +65,10 @@ export function PortfolioIndex({ transactions, onShow }) {
               <td>{transaction.asset_name}</td>
               <td>{transaction.asset_ticker}</td>
               <td>{transaction.shares}</td>
-              <td>$ {transaction.cost_per_share}</td>
-              <td>$ {transaction.book_value}</td>
-              <td>$ {transaction.current_value}</td>
-              <td>$ {transaction.gain_loss}</td>
+              <td>$ {parseFloat(transaction.cost_per_share).toFixed(6)}</td>
+              <td>$ {parseFloat(transaction.book_value).toFixed(2)}</td>
+              <td>$ {parseFloat(transaction.current_value).toFixed(2)}</td>
+              <td>$ {parseFloat(transaction.gain_loss).toFixed(2)}</td>
               <td>{transaction.trade_date}</td>
               <td>{transaction.asset_class}</td>
               <td><button onClick={() => onShow(transaction)}>Info &#9432;</button></td>
@@ -77,7 +77,7 @@ export function PortfolioIndex({ transactions, onShow }) {
         </tbody>
         <tfoot>
           <th><h2>Total Portfolio Value</h2></th>
-          <td>$ {total.toFixed(2)}</td>
+          <td>$ {total.toLocaleString()}</td>
         </tfoot>
       </table>
 
@@ -92,7 +92,7 @@ export function PortfolioIndex({ transactions, onShow }) {
           {Object.entries(parsedTotals).map(([assetClass, total]) => (
             <tr key={assetClass}>
               <td>{assetClass}</td>
-              <td>$ {total.toFixed(2)}</td>
+              <td>$ {total.toLocaleString()}</td>
             </tr>
           ))}
         </tbody>

@@ -4,11 +4,20 @@ import { Footer } from "./Footer";
 import { LoginPage } from "./LoginPage";
 
 function App() {
+  let unauthenticatedComponents;
+  if (localStorage.jwt === undefined) {
+    unauthenticatedComponents = (
+      <>
+        <LoginPage />      
+      </>
+    )
+  }
+
   return (
     <div>
       <Header />
+      {unauthenticatedComponents}
       <PortfolioPage />
-      <LoginPage />
       <Footer />
     </div>
   )
