@@ -24,6 +24,7 @@ export function Header() {
       <>
         {/* <a href="./LoginPage">Login</a> |&nbsp; */}
         <a href="./SignupPage">Signup</a> |&nbsp;
+        {/* <Link to="/signup">Signup</Link> |&nbsp; */}
       </>
     )
   } else {
@@ -41,19 +42,17 @@ export function Header() {
         <Link to="/">Link</Link> |&nbsp;
         <Link to="./LoginPage"></Link> */}
 
-        <a href="#">Portfolio</a>
-        &nbsp;|&nbsp; <a href="#">Equities</a>
-        &nbsp;|&nbsp; <a href="#">Fixed Income</a>
-        &nbsp;|&nbsp; <a href="#">Commodities</a>
-        &nbsp;|&nbsp; <a href="#">Gold</a>
+        {/* <a href="#">Portfolio</a> */}
+        {/* &nbsp;|&nbsp; <a href="#">Equities</a> */}
+        {/* &nbsp;|&nbsp; <a href="#">Fixed Income</a> */}
+        {/* &nbsp;|&nbsp; <a href="#">Commodities</a> */}
+        {/* &nbsp;|&nbsp; <a href="#">Gold</a> */}
         {/* &nbsp;|&nbsp; <a href="./LoginPage">Login</a> */}
         {/* &nbsp;|&nbsp; <a href="./SignupPage">Signup</a> */}
         {/* &nbsp;|&nbsp; <a href="./LogoutLink">Logout</a> */}
         <div>
           {user}
-        </div>
-        <div>
-        {authenticationLinks}
+          &nbsp;|&nbsp;{authenticationLinks}
         </div>
       </nav>
     </header>

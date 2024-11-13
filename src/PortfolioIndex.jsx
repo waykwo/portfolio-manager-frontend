@@ -2,6 +2,11 @@ import { useState } from "react";
 
 export function PortfolioIndex({ transactions, onShow }) {
   console.log(transactions)
+
+  function titleCase(str) {
+    return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  }
+
   const [selectedAssetClass, setSelectedAssetClass] = useState('All');
 
   // Calculate portfolio total
@@ -48,8 +53,12 @@ export function PortfolioIndex({ transactions, onShow }) {
     'All', ...new Set(transactions.map((transaction) => transaction.asset_class))
   ];
   
+  // Get the total for the selected asset class
+  const selectedTotal = selectedAssetClass === 'All' 
+  ? total : parsedTotals[selectedAssetClass] || 0;
+
   // Filter transactions based on selected asset class
-  const filteredTransactions = selectedAssetClass === 'All'
+  const filteredTransactions = selectedAssetClass === 'All' 
   ? transactions
   : transactions.filter((transaction) => transaction.asset_class === selectedAssetClass);
 
@@ -60,7 +69,7 @@ export function PortfolioIndex({ transactions, onShow }) {
 
       {assetClasses.map((assetClass) => (
         <button key={assetClass} onClick={
-          () => setSelectedAssetClass(assetClass)}> {assetClass}
+          () => setSelectedAssetClass(assetClass)}> {titleCase(assetClass)}
         </button>
       ))}
 
@@ -96,8 +105,10 @@ export function PortfolioIndex({ transactions, onShow }) {
           ))}
         </tbody>
         <tfoot>
-          <th><h2>Total Portfolio Value</h2></th>
-          <td>$ {total.toLocaleString()}</td>
+        <th><h2>Total {selectedAssetClass === 'All' ? 'Portfolio' : titleCase(selectedAssetClass)} Value</h2></th>
+        <td>$ {selectedTotal.toLocaleString()}</td>
+          {/* <th><h2>Total Value</h2></th>
+          <td>$ {total.toLocaleString()}</td> */}
         </tfoot>
       </table>
 
@@ -111,7 +122,7 @@ export function PortfolioIndex({ transactions, onShow }) {
         <tbody>
           {Object.entries(parsedTotals).map(([assetClass, total]) => (
             <tr key={assetClass}>
-              <td>{assetClass}</td>
+              <td>{titleCase(assetClass)}</td>
               <td>$ {total.toLocaleString()}</td>
             </tr>
           ))}
@@ -129,7 +140,7 @@ export function PortfolioIndex({ transactions, onShow }) {
         <tbody>
           {Object.entries(parsedPercentages).map(([assetClass, percentage]) => (
             <tr key={assetClass}>
-              <td>{assetClass}</td>
+              <td>{titleCase(assetClass)}</td>
               <td>{percentage} %</td>
             </tr>
           ))}
