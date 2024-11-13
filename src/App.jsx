@@ -17,10 +17,16 @@ function App() {
 
   return (
     <div>
-      <Header />
-      {unauthenticatedComponents}
-      <PortfolioPage />
-      <Footer />
+      <div className="container mx-auto p-6 flex-auto bg-slate-700 text-white" >
+        <Header />
+      </div>
+      <div className="container mx-auto p-6 flex-auto bg-sky-50">
+        {unauthenticatedComponents}
+        <PortfolioPage />
+      </div>
+      <div className="container mx-auto p-6 flex-auto bg-slate-700 text-white text-center" >
+        <Footer />
+      </div>
     </div>
   )
 }

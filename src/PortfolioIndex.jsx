@@ -65,15 +65,12 @@ export function PortfolioIndex({ transactions, onShow }) {
 
   return (
     <div>
-      <h1>Portfolio</h1>
-
       {assetClasses.map((assetClass) => (
-        <button key={assetClass} onClick={
-          () => setSelectedAssetClass(assetClass)}> {titleCase(assetClass)}
+        <button className="bg-zinc-300 hover:bg-slate-500 hover:text-slate-200 hover:border-none text-slate-800 rounded-md  px-5 py-1 mx-1 my-2"
+          key={assetClass} onClick={() => setSelectedAssetClass(assetClass)}> {titleCase(assetClass)}
         </button>
       ))}
-
-      <table>
+      <table className="table-auto mb-5 border-separate my-table-spacing">
         <thead>
           <tr>
             <th>Asset Name</th>
@@ -112,8 +109,8 @@ export function PortfolioIndex({ transactions, onShow }) {
         </tfoot>
       </table>
 
-      <h3>Totals by Asset Class</h3>
-      <table>
+      <h3 className="font-raleway, font-extrabold, text-2xl m-8 mb-2">Totals by Asset Class</h3>
+      <table className="table-auto mb-5 border-separate my-table-spacing">
         <thead>
           <tr>
             <th>Asset Class</th>
@@ -129,8 +126,8 @@ export function PortfolioIndex({ transactions, onShow }) {
         </tbody>
       </table>
 
-      <h3>Percentages by Asset Class</h3>
-      <table>
+      <h3 className="font-raleway, font-extrabold, text-2xl m-8 mb-2">Percentages by Asset Class</h3>
+      <table className="table-auto mb-5 border-separate my-table-spacing">
         <thead>
           <tr>
             <th>Asset Class</th>

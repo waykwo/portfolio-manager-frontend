@@ -21,11 +21,11 @@ export function Header() {
   if (localStorage.jwt === undefined) {
     console.log("Logged out");
     authenticationLinks = (
-      <>
+      <div>
         {/* <a href="./LoginPage">Login</a> |&nbsp; */}
-        <a href="./SignupPage">Signup</a> |&nbsp;
+        <a href="./SignupPage">Signup</a>
         {/* <Link to="/signup">Signup</Link> |&nbsp; */}
-      </>
+      </div>
     )
   } else {
     console.log("Logged in");
