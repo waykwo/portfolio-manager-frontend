@@ -20,11 +20,15 @@ export function TransactionShow({ transaction, onUpdate }) {
       </div>
       <div>
         <label>Cost Per Share</label>
-        <div>{transaction.cost_per_share}</div>
+        <div>$ {transaction.cost_per_share}</div>
       </div>
       <div>
         <label>Trade Date</label>
         <div>{transaction.trade_date}</div>
+      </div>
+      <div>
+        <label>Latest Price</label>
+        <div>$ {transaction.latest_price}</div>
       </div>
 
       <form onSubmit={handleSubmit}>
