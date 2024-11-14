@@ -17,14 +17,14 @@ function App() {
 
   return (
     <div>
-      <div className="container mx-auto p-6 flex-auto bg-slate-700 text-white" >
+      <div className="container mx-auto p-6 flex-auto bg-sky-50" >
         <Header />
       </div>
-      <div className="container mx-auto p-6 flex-auto bg-sky-50">
+      <div className="container mx-auto p-6 flex-auto bg-sky-50 border-y-4 border-slate-300">
         {unauthenticatedComponents}
         <PortfolioPage />
       </div>
-      <div className="container mx-auto p-6 flex-auto bg-slate-700 text-white text-center" >
+      <div className="container mx-auto p-6 flex-auto bg-sky-50" >
         <Footer />
       </div>
     </div>

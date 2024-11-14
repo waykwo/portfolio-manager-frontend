@@ -22,7 +22,18 @@ export function PortfolioIndex({ transactions, onShow }) {
       }
       result[transaction.asset_class] += Number(transaction.book_value);
       return result;
-    }, {}); 
+    }, {});
+  };
+
+  // Calculate gain/loss by asset class 
+  const gainLossByAssetClass = () => {
+    return transactions.reduce((result, transaction) => {
+      if (!result[transaction.asset_class]) {
+        result[transaction.asset_class] = 0;
+      }
+      result[transaction.asset_class] += Number(transaction.gain_loss);
+      return result;
+    }, {});
   };
 
   // Calculate percentage of each asset class in relation to total
@@ -36,37 +47,50 @@ export function PortfolioIndex({ transactions, onShow }) {
 
   // Totals and percentages by asset class
   const totalsByClass = totalByAssetClass();
+  const gainLossByClass = gainLossByAssetClass();
   const percentagesByClass = percentageByAssetClass(total, totalsByClass);
 
   // JSON
   const totalsJson = JSON.stringify(totalsByClass, null, 2);
+  const gainLossJson = JSON.stringify(gainLossByClass, null, 2);
   const percentagesJson = JSON.stringify(percentagesByClass, null, 2);
   console.log(totalsJson);
+  console.log(gainLossJson);
   console.log(percentagesJson);
 
   // Parse the JSON
   const parsedTotals = JSON.parse(totalsJson);
+  const parsedGainLoss = JSON.parse(gainLossJson);
   const parsedPercentages = JSON.parse(percentagesJson);
 
   // Get unique asset classes
   const assetClasses = [
-    'All', ...new Set(transactions.map((transaction) => transaction.asset_class))
+    'All',
+    ...new Set(transactions.map((transaction) => transaction.asset_class))
   ];
-  
+
   // Get the total for the selected asset class
-  const selectedTotal = selectedAssetClass === 'All' 
-  ? total : parsedTotals[selectedAssetClass] || 0;
+  const selectedTotal = selectedAssetClass === 'All'
+    ? total
+    : parsedTotals[selectedAssetClass] || 0;
+
+  // Get the gain/loss for the selected asset class
+  const selectedGainLoss = selectedAssetClass === 'All'
+    ? transactions.reduce((sum, transaction) => sum + Number(transaction.gain_loss), 0)
+    : parsedGainLoss[selectedAssetClass] || 0;
 
   // Filter transactions based on selected asset class
-  const filteredTransactions = selectedAssetClass === 'All' 
-  ? transactions
-  : transactions.filter((transaction) => transaction.asset_class === selectedAssetClass);
-
+  const filteredTransactions =
+    selectedAssetClass === 'All'
+      ? transactions
+      : transactions.filter(
+        (transaction) => transaction.asset_class === selectedAssetClass
+      );
 
   return (
     <div>
       {assetClasses.map((assetClass) => (
-        <button className="bg-zinc-300 hover:bg-slate-500 hover:text-slate-200 hover:border-none text-slate-800 rounded-md  px-5 py-1 mx-1 my-2"
+        <button className="bg-transparent outline hover:bg-indigo-500 hover:text-slate-200 text-slate-800 rounded-md  px-5 py-1 mx-1 my-2"
           key={assetClass} onClick={() => setSelectedAssetClass(assetClass)}> {titleCase(assetClass)}
         </button>
       ))}
@@ -102,10 +126,30 @@ export function PortfolioIndex({ transactions, onShow }) {
           ))}
         </tbody>
         <tfoot>
-        <th><h2>Total {selectedAssetClass === 'All' ? 'Portfolio' : titleCase(selectedAssetClass)} Value</h2></th>
-        <td>$ {selectedTotal.toLocaleString()}</td>
-          {/* <th><h2>Total Value</h2></th>
-          <td>$ {total.toLocaleString()}</td> */}
+          <tr>
+            <th>
+              <h2>
+                Total{" "}
+                {selectedAssetClass === "All"
+                  ? "Portfolio"
+                  : titleCase(selectedAssetClass)}{" "}
+                Value
+              </h2>
+            </th>
+            <td>$ {selectedTotal.toLocaleString()}</td>
+          </tr>
+          <tr>
+            <th>
+              <h2>
+                Total{" "}
+                {selectedAssetClass === "All"
+                  ? "Portfolio"
+                  : titleCase(selectedAssetClass)}{" "}
+                Gain/Loss
+              </h2>
+            </th>
+            <td>$ {selectedGainLoss.toLocaleString()}</td>
+          </tr>
         </tfoot>
       </table>
 

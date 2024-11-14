@@ -1,7 +1,7 @@
 export function Footer() {
   return (
     <footer>
-      <p>Copyright 2024</p>
+      <p className="text-center">Copyright 2024</p>
     </footer>
   )
 }

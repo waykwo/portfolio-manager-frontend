@@ -77,12 +77,12 @@ export function PortfolioPage() {
 
   return (
     <main>
-        <h1 className="float-left font-raleway, font-black, text-6xl m-8">Portfolio</h1>
-        <button className="bg-indigo-700 hover:bg-indigo-500 text-slate-200     rounded-md  px-5 py-1 mt-12 mb-1 my-2" onClick={handlePurchaseAsset}>Purchase Asset</button>
+      <h1 className="float-left font-raleway, font-black, text-6xl m-8">Portfolio</h1>
+      <button className="bg-indigo-700 hover:bg-indigo-500 text-slate-200     rounded-md  px-5 py-1 mt-12 mb-1 my-2" onClick={handlePurchaseAsset}>+ Purchase Asset</button>
       <div className="clear-both">
         <PortfolioIndex transactions={transactions} onShow={handleShow} />
         <Modal show={isTransactionNewVisible} onClose={handleClose} >
-          <TransactionNew assets={assets} onCreate={handleCreate}/>
+          <TransactionNew assets={assets} onCreate={handleCreate} />
         </Modal>
         <Modal show={isTransactionShowVisible} onClose={handleClose} >
           <TransactionShow transaction={currentTransaction} onUpdate={handleUpdate} />

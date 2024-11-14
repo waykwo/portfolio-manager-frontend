@@ -33,7 +33,7 @@ export function Header() {
     authenticationLinks = (
       <LogoutLink />
     )
-   };
+  };
 
   return (
     <header>
@@ -50,10 +50,13 @@ export function Header() {
         {/* &nbsp;|&nbsp; <a href="./LoginPage">Login</a> */}
         {/* &nbsp;|&nbsp; <a href="./SignupPage">Signup</a> */}
         {/* &nbsp;|&nbsp; <a href="./LogoutLink">Logout</a> */}
-        <div>
+        <div className="float-left">
           {user}
-          &nbsp;|&nbsp;{authenticationLinks}
         </div>
+        <div className="float-right">
+          {authenticationLinks}
+        </div>
+        <div className="clear-both"></div>
       </nav>
     </header>
   )
