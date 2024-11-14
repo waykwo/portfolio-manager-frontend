@@ -20,7 +20,7 @@ function App() {
       <div className="container mx-auto p-6 flex-auto bg-sky-50" >
         <Header />
       </div>
-      <div className="container mx-auto p-6 flex-auto bg-sky-50 border-y-4 border-slate-300">
+      <div className="container mx-auto p-6 flex-auto bg-sky-50 border-y-4 border-indigo-700">
         {unauthenticatedComponents}
         <PortfolioPage />
       </div>

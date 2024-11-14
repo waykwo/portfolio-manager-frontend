@@ -5,11 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
-    fontFamily: {
-      "raleway": "Raleway"
+    extend: {
+      fontFamily: {
+        raleway: ['Raleway', 'Helvetica', 'Arial', 'sans-serif']
+      },
     },
-    extend: {},
   },
   plugins: [],
 }
-

@@ -76,8 +76,8 @@ export function PortfolioPage() {
   useEffect(loadAssetsData, []);
 
   return (
-    <main>
-      <h1 className="float-left font-raleway, font-black, text-6xl m-8">Portfolio</h1>
+    <main className="font-raleway">
+      <h1 className="float-left font-medium text-6xl m-8">All-Weather Portfolio</h1>
       <button className="bg-indigo-700 hover:bg-indigo-500 text-slate-200     rounded-md  px-5 py-1 mt-12 mb-1 my-2" onClick={handlePurchaseAsset}>+ Purchase Asset</button>
       <div className="clear-both">
         <PortfolioIndex transactions={transactions} onShow={handleShow} />

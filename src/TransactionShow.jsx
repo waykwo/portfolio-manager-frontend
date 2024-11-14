@@ -9,14 +9,26 @@ export function TransactionShow({ transaction, onUpdate }) {
 
   return (
     <div>
-      <h1>{transaction.asset_name}</h1>
-      <p>Ticker: {transaction.asset_ticker}</p>
-      <p>Shares: {transaction.shares}</p>
-      <p>Cost Per Share: {transaction.cost_per_share}</p>
-      <p>Trade Date: {transaction.trade_date}</p>
+      <h1 className="font-medium text-6xl m-8">{transaction.asset_name}</h1>
+      <div>
+        <label>Ticker</label>
+        <div>{transaction.asset_ticker}</div>
+      </div>
+      <div>
+        <label>Shares</label>
+        <div>{transaction.shares}</div>
+      </div>
+      <div>
+        <label>Cost Per Share</label>
+        <div>{transaction.cost_per_share}</div>
+      </div>
+      <div>
+        <label>Trade Date</label>
+        <div>{transaction.trade_date}</div>
+      </div>
 
       <form onSubmit={handleSubmit}>
-        <h3>Update</h3>
+        <h3 className="text-2xl font-semibold m-8 mb-3">Update</h3>
         <div>
           <label htmlFor="shares">Shares</label>
           <input name="shares" type="decimal" defaultValue={transaction.shares} />
@@ -29,7 +41,7 @@ export function TransactionShow({ transaction, onUpdate }) {
           <label htmlFor="trade_date">Trade Date</label>
           <input name="trade_date" type="date" defaultValue={transaction.trade_date} />
         </div>
-        <button type="submit">Update</button>
+        <button className="bg-indigo-700 hover:bg-indigo-500 text-slate-200 rounded-md  px-5 py-1 mt-8 mb-1 my-2" type="submit">Update</button>
       </form>
 
 

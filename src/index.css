@@ -1,25 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Honk&family=Protest+Guerrilla&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Honk&family=Protest+Guerrilla&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-
 @layer components {
   .my-table-spacing {
-    border-spacing: theme("spacing.3");
+    border-spacing: theme("spacing.2");
   }
-}
 
-/* @layer base {
-  @font-face {
-    font-family: 'Raleway, sans-serif';
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(/fonts/Roboto.woff2) format('woff2');
+  label {
+    float: left;
+    width: 10em;
   }
-} */
+  
+  input, select {
+    clear: left;
+    border-width: 1px;
+    border-color: slateblue;
+  }
+
+}
 
 html {
   scroll-behavior: smooth;

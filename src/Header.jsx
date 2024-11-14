@@ -4,7 +4,6 @@ import { LogoutLink } from "./LogoutLink";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-
 export function Header() {
   const [currentUser, setCurrentUser] = useState({});
   const getUserData = () => {
@@ -50,10 +49,10 @@ export function Header() {
         {/* &nbsp;|&nbsp; <a href="./LoginPage">Login</a> */}
         {/* &nbsp;|&nbsp; <a href="./SignupPage">Signup</a> */}
         {/* &nbsp;|&nbsp; <a href="./LogoutLink">Logout</a> */}
-        <div className="float-left">
+        <div className="float-left font-raleway text-xl">
           {user}
         </div>
-        <div className="float-right">
+        <div className="float-right font-raleway text-xl hover:font-bold hover:text-orange-600">
           {authenticationLinks}
         </div>
         <div className="clear-both"></div>

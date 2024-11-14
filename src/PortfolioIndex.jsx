@@ -89,11 +89,19 @@ export function PortfolioIndex({ transactions, onShow }) {
 
   return (
     <div>
-      {assetClasses.map((assetClass) => (
-        <button className="bg-transparent outline hover:bg-indigo-500 hover:text-slate-200 text-slate-800 rounded-md  px-5 py-1 mx-1 my-2"
-          key={assetClass} onClick={() => setSelectedAssetClass(assetClass)}> {titleCase(assetClass)}
-        </button>
-      ))}
+      {assetClasses.map((assetClass) => {
+        const isSelected = selectedAssetClass === assetClass;
+        const buttonClass = isSelected
+          ? "bg-indigo-700 text-slate-200"
+          : "bg-transparent text-slate-800 hover:bg-indigo-700 hover:text-slate-200";
+        return (
+          <button
+            className={`outline rounded-md px-5 py-1 mx-1 my-2 mb-6 ${buttonClass}`}
+            key={assetClass}
+            onClick={() => setSelectedAssetClass(assetClass)}
+          > {titleCase(assetClass)}
+          </button>);
+      })}
       <table className="table-auto mb-5 border-separate my-table-spacing">
         <thead>
           <tr>
@@ -106,7 +114,7 @@ export function PortfolioIndex({ transactions, onShow }) {
             <th>Gain/Loss</th>
             <th>Trade Date</th>
             <th>Asset Class</th>
-            <th>More Info</th>
+            <th>Info</th>
           </tr>
         </thead>
         <tbody>
@@ -121,7 +129,7 @@ export function PortfolioIndex({ transactions, onShow }) {
               <td>$ {parseFloat(transaction.gain_loss).toFixed(2)}</td>
               <td>{transaction.trade_date}</td>
               <td>{transaction.asset_class}</td>
-              <td><button onClick={() => onShow(transaction)}>Info &#9432;</button></td>
+              <td><button onClick={() => onShow(transaction)}>&#9432;</button></td>
             </tr>
           ))}
         </tbody>
@@ -153,7 +161,7 @@ export function PortfolioIndex({ transactions, onShow }) {
         </tfoot>
       </table>
 
-      <h3 className="font-raleway, font-extrabold, text-2xl m-8 mb-2">Totals by Asset Class</h3>
+      <h3 className="font-extrabold, text-2xl m-8 mb-2">Totals by Asset Class</h3>
       <table className="table-auto mb-5 border-separate my-table-spacing">
         <thead>
           <tr>
@@ -170,7 +178,7 @@ export function PortfolioIndex({ transactions, onShow }) {
         </tbody>
       </table>
 
-      <h3 className="font-raleway, font-extrabold, text-2xl m-8 mb-2">Percentages by Asset Class</h3>
+      <h3 className="font-extrabold, text-2xl m-8 mb-2">Percentages by Asset Class</h3>
       <table className="table-auto mb-5 border-separate my-table-spacing">
         <thead>
           <tr>

@@ -7,7 +7,7 @@ export function TransactionNew({ assets, onCreate }) {
 
   return (
     <div>
-      <h1>Purchase Asset</h1>
+      <h1 className="font-medium text-6xl m-8">Purchase Asset</h1>
       <form onSubmit={handleSubmit}>
         {/* <div>
           <label htmlFor="ticker">Ticker</label>
@@ -36,7 +36,7 @@ export function TransactionNew({ assets, onCreate }) {
           <label htmlFor="trade_date">Trade Date</label>
           <input name="trade_date" type="date" />
         </div>
-        <button type="submit">Create</button>
+        <button className="bg-indigo-700 hover:bg-indigo-500 text-slate-200 rounded-md  px-5 py-1 mt-8 mb-1 my-2" type="submit">Create</button>
       </form>
     </div>
   );
