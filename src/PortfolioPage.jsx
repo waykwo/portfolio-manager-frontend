@@ -27,6 +27,7 @@ export function PortfolioPage() {
       setTransactions([...transactions, response.data]);
       console.log(response.data);
       successCallback();
+      setIsTransactionNewVisible(false);
     });
   };
 
@@ -59,7 +60,7 @@ export function PortfolioPage() {
         })
       );
       successCallback();
-      handleClose();
+      setIsTransactionShowVisible(false);
     });
   };
 
