@@ -20,7 +20,7 @@ export function TransactionShow({ transaction, onUpdate }) {
       </div>
       <div>
         <label>Cost Per Share</label>
-        <div>$ {transaction.cost_per_share}</div>
+        <div>$ {Number(transaction.cost_per_share).toFixed(2)}</div>
       </div>
       <div>
         <label>Trade Date</label>
@@ -28,22 +28,22 @@ export function TransactionShow({ transaction, onUpdate }) {
       </div>
       <div>
         <label>Latest Price</label>
-        <div>$ {transaction.latest_price}</div>
+        <div>$ {Number(transaction.latest_price).toFixed(2)}</div>
       </div>
 
       <form onSubmit={handleSubmit}>
         <h3 className="text-2xl font-semibold m-8 mb-3">Update</h3>
         <div>
-          <label htmlFor="shares">Shares</label>
-          <input name="shares" type="decimal" defaultValue={transaction.shares} />
+          <label className="m-1 mt-2" htmlFor="shares">Shares</label>
+          <input className="m-1 p-1 border rounded" name="shares" type="decimal" defaultValue={transaction.shares} />
         </div>
         <div>
-          <label htmlFor="cost_per_share">Cost Per Share</label>
-          <input name="cost_per_share" type="decimal" defaultValue={transaction.cost_per_share} />
+          <label className="m-1 mt-2" htmlFor="cost_per_share">Cost Per Share</label>
+          <input className="m-1 p-1 border rounded" name="cost_per_share" type="decimal" defaultValue={transaction.cost_per_share} />
         </div>
         <div>
-          <label htmlFor="trade_date">Trade Date</label>
-          <input name="trade_date" type="date" defaultValue={transaction.trade_date} />
+          <label className="m-1 mt-2" htmlFor="trade_date">Trade Date</label>
+          <input className="m-1 p-1 border rounded" name="trade_date" type="date" defaultValue={transaction.trade_date} />
         </div>
         <button className="bg-indigo-700 hover:bg-indigo-500 text-slate-200 rounded-md  px-5 py-1 mt-8 mb-1 my-2" type="submit">Update</button>
       </form>
