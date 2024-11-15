@@ -34,17 +34,23 @@ export function TransactionNew({ onCreate }) {
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
+    setSelectedAsset(null); // Clear the selected asset when the search term changes
   };
 
   const handleSelectAsset = (asset) => {
     setSelectedAsset(asset);
-    setSearchTerm(asset.ticker); // set search term to selected asset's ticker
+    setSearchTerm(""); // Clear the search term to hide dropdown
+  }
+
+  const handleUnselectAsset = () => {
+    setSelectedAsset(null);
+    setSearchTerm(""); // Reset search term
   }
 
   const filteredAssets = assets.filter((asset) =>
     asset.ticker.toLowerCase().includes(searchTerm.toLowerCase()) ||
     asset.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  ).sort((a, b) => a.ticker.localeCompare(b.ticker)); // Sort tickers
 
   return (
     <div>
@@ -63,19 +69,31 @@ export function TransactionNew({ onCreate }) {
             className="w-1/2 m-1 p-1 border rounded"
           />
           {searchTerm && (
-            <ul className="search-results absolute z-10 bg-white border rounded max-h-40 overflow-y-auto">
+            <div className="search-results absolute z-10 bg-white border rounded max-h-40 overflow-y-auto">
               {filteredAssets.map((asset) => (
-                <li
+                <div
                   key={asset.id}
                   onClick={() => handleSelectAsset(asset)}
                   className="p-2 hover:bg-indigo-100 cursor-pointer"
                 >
                   {asset.ticker} - {asset.name}
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           )}
-          {/* {searchTerm && (
+          {selectedAsset && (
+            <div className="mt-2 m-8 text-indigo-700">
+              {selectedAsset.ticker} - {selectedAsset.name}
+              <button
+                type="button"
+                className="ml-2 text-slate-500 hover:text-red-500"
+                onClick={handleUnselectAsset}
+              >&#x2716;
+              </button>
+            </div>
+          )}
+        </div>
+        {/* {searchTerm && (
             <ul className="search-results">
               {filteredAssets.map((asset) => (
                 <li key={asset.id} onClick={() => handleSelectAsset(asset)}>
@@ -84,13 +102,12 @@ export function TransactionNew({ onCreate }) {
               ))}
             </ul>
           )} */}
-          {/* &nbsp;{ticker.toUpperCase()}
+        {/* &nbsp;{ticker.toUpperCase()}
           <select name="financial_asset_id" id="financial_asset_id">
             {assets.map((asset) => (
               <option key={asset.id} value={asset.id}>{asset.ticker}</option>
             ))}
           </select> */}
-        </div>
         {/* <div>
           <label htmlFor="financial_asset_id">Select Asset</label>
           <select name="financial_asset_id" id="financial_asset_id">
