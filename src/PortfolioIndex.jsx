@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { PieChart } from "@mui/x-charts";
+import { blueberryTwilightPalette } from "@mui/x-charts";
 
 export function PortfolioIndex({ transactions, onShow }) {
   console.log(transactions)
@@ -87,114 +89,149 @@ export function PortfolioIndex({ transactions, onShow }) {
         (transaction) => transaction.asset_class === selectedAssetClass
       );
 
+  // Pie chart data
+  const pieChartData = Object.entries(parsedPercentages).map(([assetClass, percentage], index) => ({
+    id: index,
+    value: parseFloat(percentage),
+    label: titleCase(assetClass)
+  }));
+
   return (
     <div>
-      {assetClasses.map((assetClass) => {
-        const isSelected = selectedAssetClass === assetClass;
-        const buttonClass = isSelected
-          ? "bg-indigo-700 text-slate-200"
-          : "bg-transparent text-slate-800 hover:bg-indigo-700 hover:text-slate-200";
-        return (
-          <button
-            className={`outline rounded-md px-5 py-1 mx-1 my-2 mb-6 ${buttonClass}`}
-            key={assetClass}
-            onClick={() => setSelectedAssetClass(assetClass)}
-          > {titleCase(assetClass)}
-          </button>);
-      })}
-      <table className="table-auto mb-5 border-separate my-table-spacing">
-        <thead>
-          <tr>
-            <th>Asset Name</th>
-            <th>Ticker</th>
-            <th>Shares</th>
-            <th>Cost Per Share</th>
-            <th>Book Value</th>
-            <th>Current Value</th>
-            <th>Gain/Loss</th>
-            <th>Trade Date</th>
-            <th>Asset Class</th>
-            <th>Info</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredTransactions.map((transaction) => (
-            <tr key={transaction.id}>
-              <td>{transaction.asset_name}</td>
-              <td>{transaction.asset_ticker}</td>
-              <td>{transaction.shares}</td>
-              <td>$ {parseFloat(transaction.cost_per_share).toFixed(6)}</td>
-              <td>$ {parseFloat(transaction.book_value).toFixed(2)}</td>
-              <td>$ {parseFloat(transaction.current_value).toFixed(2)}</td>
-              <td>$ {parseFloat(transaction.gain_loss).toFixed(2)}</td>
-              <td>{transaction.trade_date}</td>
-              <td>{transaction.asset_class}</td>
-              <td><button onClick={() => onShow(transaction)}>&#9432;</button></td>
+      <div>
+        {assetClasses.map((assetClass) => {
+          const isSelected = selectedAssetClass === assetClass;
+          const buttonClass = isSelected
+            ? "bg-indigo-700 text-slate-200"
+            : "bg-transparent text-slate-800 hover:bg-indigo-700 hover:text-slate-200";
+          return (
+            <button
+              className={`outline rounded-md px-5 py-1 mx-1 my-2 mb-6 ${buttonClass}`}
+              key={assetClass}
+              onClick={() => setSelectedAssetClass(assetClass)}
+            > {titleCase(assetClass)}
+            </button>);
+        })}
+        <table className="table-auto mb-5 border-separate my-table-spacing">
+          <thead>
+            <tr>
+              <th>Asset Name</th>
+              <th>Ticker</th>
+              <th>Shares</th>
+              <th>Cost Per Share</th>
+              <th>Book Value</th>
+              <th>Current Value</th>
+              <th>Gain/Loss</th>
+              <th>Trade Date</th>
+              <th>Asset Class</th>
+              <th>Info</th>
             </tr>
-          ))}
-        </tbody>
-        <tfoot>
-          <tr>
-            <th>
-              <h2>
-                Total{" "}
-                {selectedAssetClass === "All"
-                  ? "Portfolio"
-                  : titleCase(selectedAssetClass)}{" "}
-                Value
-              </h2>
-            </th>
-            <td>$ {selectedTotal.toLocaleString()}</td>
-          </tr>
-          <tr>
-            <th>
-              <h2>
-                Total{" "}
-                {selectedAssetClass === "All"
-                  ? "Portfolio"
-                  : titleCase(selectedAssetClass)}{" "}
-                Gain/Loss
-              </h2>
-            </th>
-            <td>$ {selectedGainLoss.toLocaleString()}</td>
-          </tr>
-        </tfoot>
-      </table>
+          </thead>
+          <tbody>
+            {filteredTransactions.map((transaction) => (
+              <tr key={transaction.id}>
+                <td>{transaction.asset_name}</td>
+                <td>{transaction.asset_ticker}</td>
+                <td>{transaction.shares}</td>
+                <td>$ {parseFloat(transaction.cost_per_share).toFixed(6)}</td>
+                <td>$ {parseFloat(transaction.book_value).toFixed(2)}</td>
+                <td>$ {parseFloat(transaction.current_value).toFixed(2)}</td>
+                <td>$ {parseFloat(transaction.gain_loss).toFixed(2)}</td>
+                <td>{transaction.trade_date}</td>
+                <td>{transaction.asset_class}</td>
+                <td><button onClick={() => onShow(transaction)}>&#9432;</button></td>
+              </tr>
+            ))}
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>
+                <h2>
+                  Total{" "}
+                  {selectedAssetClass === "All"
+                    ? "Portfolio"
+                    : titleCase(selectedAssetClass)}{" "}
+                  Value
+                </h2>
+              </th>
+              <td>$ {selectedTotal.toLocaleString()}</td>
+            </tr>
+            <tr>
+              <th>
+                <h2>
+                  Total{" "}
+                  {selectedAssetClass === "All"
+                    ? "Portfolio"
+                    : titleCase(selectedAssetClass)}{" "}
+                  Gain/Loss
+                </h2>
+              </th>
+              <td>$ {selectedGainLoss.toLocaleString()}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
 
-      <h3 className="font-extrabold, text-2xl m-8 mb-2">Totals by Asset Class</h3>
-      <table className="table-auto mb-5 border-separate my-table-spacing">
-        <thead>
-          <tr>
-            <th>Asset Class</th>
-            <th>Total</th> </tr>
-        </thead>
-        <tbody>
-          {Object.entries(parsedTotals).map(([assetClass, total]) => (
-            <tr key={assetClass}>
-              <td>{titleCase(assetClass)}</td>
-              <td>$ {total.toLocaleString()}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="grid grid-rows-2 grid-flow-col-dense">
+        <div className="row-span-4 mt-16">
+          <PieChart
+            colors={blueberryTwilightPalette}
+            series={[
+              {
+                data: pieChartData,
+                innerRadius: 80,
+                cornerRadius: 5,
+                highlightScope: { fade: 'global', highlight: 'item' },
+                faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
+              },
+            ]}
+            width={600}
+            height={350}
+          />
+        </div>
 
-      <h3 className="font-extrabold, text-2xl m-8 mb-2">Percentages by Asset Class</h3>
-      <table className="table-auto mb-5 border-separate my-table-spacing">
-        <thead>
-          <tr>
-            <th>Asset Class</th>
-            <th>Percentage</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.entries(parsedPercentages).map(([assetClass, percentage]) => (
-            <tr key={assetClass}>
-              <td>{titleCase(assetClass)}</td>
-              <td>{percentage} %</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        <div>
+          <h3 className="font-extrabold, text-2xl m-8 mb-2">Percentages by Asset Class</h3>
+          <table className="table-auto mb-5 border-separate my-table-spacing">
+            <thead>
+              <tr>
+                <th>Asset Class</th>
+                <th>Percentage</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(parsedPercentages).map(([assetClass, percentage]) => (
+                <tr key={assetClass}>
+                  <td>{titleCase(assetClass)}</td>
+                  <td>{percentage} %</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="">
+          <h3 className="font-extrabold, text-2xl m-8 mb-2">Totals by Asset Class</h3>
+          <table className="table-auto mb-5 border-separate my-table-spacing">
+            <thead>
+              <tr>
+                <th>Asset Class</th>
+                <th>Total</th> </tr>
+            </thead>
+            <tbody>
+              {Object.entries(parsedTotals).map(([assetClass, total]) => (
+                <tr key={assetClass}>
+                  <td>{titleCase(assetClass)}</td>
+                  <td>$ {total.toLocaleString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
     </div>
+
   );
 }
