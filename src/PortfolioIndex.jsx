@@ -154,7 +154,7 @@ export function PortfolioIndex({ transactions, onShow }) {
                   Value
                 </h2>
               </th>
-              <td>$ {selectedTotal.toLocaleString()}</td>
+              <td>$ {(selectedTotal).toLocaleString()}</td>
             </tr>
             <tr>
               <th>

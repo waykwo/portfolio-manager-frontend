@@ -10,7 +10,7 @@ export function PortfolioPage() {
   const [isTransactionShowVisible, setIsTransactionShowVisible] = useState(false);
   const [isTransactionNewVisible, setIsTransactionNewVisible] = useState(false);
   const [currentTransaction, setCurrentTransaction] = useState({});
-  const [assets, setAssets] = useState([]);
+  // const [assets, setAssets] = useState([]);
 
   const handleIndex = () => {
     console.log("handleIndex");
@@ -64,17 +64,17 @@ export function PortfolioPage() {
     });
   };
 
-  const loadAssetsData = () => {
-    console.log("loadAssetData");
-    axios.get("http://localhost:3000/financial_assets.json").then((response) => {
-      console.log("Assets");
-      console.log(response.data);
-      setAssets(response.data);
-    });
-  };
+  // const loadAssetsData = () => {
+  //   console.log("loadAssetData");
+  //   axios.get("http://localhost:3000/financial_assets.json").then((response) => {
+  //     console.log("Assets");
+  //     console.log(response.data);
+  //     setAssets(response.data);
+  //   });
+  // };
 
   useEffect(handleIndex, []);
-  useEffect(loadAssetsData, []);
+  // useEffect(loadAssetsData, []);
 
   return (
     <main className="font-raleway">
@@ -83,7 +83,7 @@ export function PortfolioPage() {
       <div className="clear-both">
         <PortfolioIndex transactions={transactions} onShow={handleShow} />
         <Modal show={isTransactionNewVisible} onClose={handleClose} >
-          <TransactionNew assets={assets} onCreate={handleCreate} />
+          <TransactionNew onCreate={handleCreate} />
         </Modal>
         <Modal show={isTransactionShowVisible} onClose={handleClose} >
           <TransactionShow transaction={currentTransaction} onUpdate={handleUpdate} />

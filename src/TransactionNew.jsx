@@ -1,8 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-export function TransactionNew({ assets, onCreate }) {
+export function TransactionNew({ onCreate }) {
+  const [assets, setAssets] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedAsset, setSelectedAsset] = useState(null);
+
+  const loadAssetsData = () => {
+    console.log("loadAssetData");
+    axios.get("http://localhost:3000/financial_assets.json").then((response) => {
+      console.log("Assets");
+      console.log(response.data);
+      setAssets(response.data);
+    });
+  };
+
+  useEffect(loadAssetsData, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
