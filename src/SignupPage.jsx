@@ -23,7 +23,7 @@ export function SignupPage() {
 
   return (
     <div id="signup">
-      <h1>Signup</h1>
+      <h3 className="text-3xl font-semibold m-8">Signup</h3>
       <ul>
         {errors.map((error) => (
           <li key={error}>{error}</li>

@@ -1,29 +1,94 @@
+import { useState } from "react";
+
 export function TransactionNew({ assets, onCreate }) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedAsset, setSelectedAsset] = useState(null);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const params = new FormData(event.target);
-    onCreate(params, () => event.target.reset());
+    if (selectedAsset) {
+      params.append("financial_asset_id", selectedAsset.id);
+      onCreate(params, () => {
+        event.target.reset();
+        setSearchTerm(""); // Reset search term
+        setSelectedAsset(null); // Reset the selected asset
+      });
+    } else {
+      alert("Please select an asset.");
+    }
   };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSelectAsset = (asset) => {
+    setSelectedAsset(asset);
+    setSearchTerm(asset.ticker); // set search term to selected asset's ticker
+  }
+
+  const filteredAssets = assets.filter((asset) =>
+    asset.ticker.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    asset.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div>
       <h1 className="font-medium text-6xl m-8">Purchase Asset</h1>
       <form onSubmit={handleSubmit}>
-        {/* <div>
-          <label htmlFor="ticker">Ticker</label>
-          <input name="ticker" type="text" />
-        </div> */}
         <div>
+          <label htmlFor="ticker">Search Ticker</label>
+          <input
+            id="ticker_search"
+            type="search"
+            // maxLength={5}
+            value={searchTerm}
+            // onChange={(event) => setTicker(event.target.value)}
+            onChange={handleSearchChange}
+            placeholder="Search by ticker or asset name"
+            className="p-1 border rounded"
+          />
+          {searchTerm && (
+            <ul className="search-results absolute z-10 bg-white border rounded max-h-40 overflow-y-auto">
+              {filteredAssets.map((asset) => (
+                <li
+                  key={asset.id}
+                  onClick={() => handleSelectAsset(asset)}
+                  className="p-2 hover:bg-indigo-100 cursor-pointer"
+                >
+                  {asset.ticker} - {asset.name}
+                </li>
+              ))}
+            </ul>
+          )}
+          {/* {searchTerm && (
+            <ul className="search-results">
+              {filteredAssets.map((asset) => (
+                <li key={asset.id} onClick={() => handleSelectAsset(asset)}>
+                  {asset.ticker} - {asset.name}
+                </li>
+              ))}
+            </ul>
+          )} */}
+          {/* &nbsp;{ticker.toUpperCase()}
+          <select name="financial_asset_id" id="financial_asset_id">
+            {assets.map((asset) => (
+              <option key={asset.id} value={asset.id}>{asset.ticker}</option>
+            ))}
+          </select> */}
+        </div>
+        {/* <div>
           <label htmlFor="financial_asset_id">Select Asset</label>
           <select name="financial_asset_id" id="financial_asset_id">
             {assets.map((asset) => (
               <option key={asset.id} value={asset.id}>{asset.name}</option>
             ))}
-          </select>
+          </select> */}
 
-          {/* <label htmlFor="financial_asset_id">Asset</label>
+        {/* <label htmlFor="financial_asset_id">Asset</label>
           <input name="financial_asset_id" type="number" /> */}
-        </div>
+        {/* </div> */}
         <div>
           <label htmlFor="shares">Shares</label>
           <input name="shares" type="decimal" />
