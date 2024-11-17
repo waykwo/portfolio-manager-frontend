@@ -54,7 +54,7 @@ export function TransactionNew({ onCreate }) {
 
   return (
     <div>
-      <h1 className="font-medium text-6xl m-8">Purchase Asset</h1>
+      <h1 className="font-prata font-medium text-5xl m-8">Purchase Asset</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label className="m-1 mt-2" htmlFor="ticker">Search Ticker</label>
@@ -69,7 +69,7 @@ export function TransactionNew({ onCreate }) {
             className="w-1/2 m-1 p-1 border rounded"
           />
           {searchTerm && (
-            <div className="search-results absolute z-10 bg-white border rounded max-h-40 overflow-y-auto">
+            <div className="search-results w-3/4 absolute z-10 bg-white border rounded max-h-40 overflow-y-auto">
               {filteredAssets.map((asset) => (
                 <div
                   key={asset.id}
