@@ -8,11 +8,11 @@ export function TransactionShow({ transaction, onUpdate }) {
   };
 
   return (
-    <div>
-      <h1 className="font-medium text-6xl m-8">{transaction.asset_name}</h1>
-      <h2 className="text-xl ml-8 -mt-5 mb-5">{transaction.asset_ticker}</h2>
+    <div className="m-8">
+      <h1 className="font-prata font-medium text-5xl m-8">{transaction.asset_name}</h1>
+      <h2 className="text-xl ml-8 -mt-6 mb-5">{transaction.asset_ticker}</h2>
 
-      <div>
+      <div className="">
         <label>Shares</label>
         <div>{transaction.shares}</div>
       </div>
