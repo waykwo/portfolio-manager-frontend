@@ -1,6 +1,4 @@
-import "./Modal.css";
-
-export function Modal ({ children, show, onClose }) {
+export function Modal({ children, show, onClose }) {
   if (show) {
     return (
       <div className="modal-background">

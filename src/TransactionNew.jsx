@@ -93,32 +93,7 @@ export function TransactionNew({ onCreate }) {
             </div>
           )}
         </div>
-        {/* {searchTerm && (
-            <ul className="search-results">
-              {filteredAssets.map((asset) => (
-                <li key={asset.id} onClick={() => handleSelectAsset(asset)}>
-                  {asset.ticker} - {asset.name}
-                </li>
-              ))}
-            </ul>
-          )} */}
-        {/* &nbsp;{ticker.toUpperCase()}
-          <select name="financial_asset_id" id="financial_asset_id">
-            {assets.map((asset) => (
-              <option key={asset.id} value={asset.id}>{asset.ticker}</option>
-            ))}
-          </select> */}
-        {/* <div>
-          <label htmlFor="financial_asset_id">Select Asset</label>
-          <select name="financial_asset_id" id="financial_asset_id">
-            {assets.map((asset) => (
-              <option key={asset.id} value={asset.id}>{asset.name}</option>
-            ))}
-          </select> */}
 
-        {/* <label htmlFor="financial_asset_id">Asset</label>
-          <input name="financial_asset_id" type="number" /> */}
-        {/* </div> */}
         <div>
           <label className="m-1 mt-2" htmlFor="shares">Shares</label>
           <input className="m-1 p-1 border rounded" name="shares" type="decimal" />

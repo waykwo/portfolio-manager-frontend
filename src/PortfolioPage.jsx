@@ -10,7 +10,6 @@ export function PortfolioPage() {
   const [isTransactionShowVisible, setIsTransactionShowVisible] = useState(false);
   const [isTransactionNewVisible, setIsTransactionNewVisible] = useState(false);
   const [currentTransaction, setCurrentTransaction] = useState({});
-  // const [assets, setAssets] = useState([]);
 
   const handleIndex = () => {
     console.log("handleIndex");
@@ -64,17 +63,7 @@ export function PortfolioPage() {
     });
   };
 
-  // const loadAssetsData = () => {
-  //   console.log("loadAssetData");
-  //   axios.get("http://localhost:3000/financial_assets.json").then((response) => {
-  //     console.log("Assets");
-  //     console.log(response.data);
-  //     setAssets(response.data);
-  //   });
-  // };
-
   useEffect(handleIndex, []);
-  // useEffect(loadAssetsData, []);
 
   return (
     <main className="font-raleway">
