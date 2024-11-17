@@ -7,10 +7,7 @@ export function TransactionNew({ onCreate }) {
   const [selectedAsset, setSelectedAsset] = useState(null);
 
   const loadAssetsData = () => {
-    console.log("loadAssetData");
     axios.get("http://localhost:3000/financial_assets.json").then((response) => {
-      console.log("Assets");
-      console.log(response.data);
       setAssets(response.data);
     });
   };

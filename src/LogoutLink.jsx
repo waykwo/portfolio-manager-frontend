@@ -7,7 +7,6 @@ export function LogoutLink() {
     localStorage.removeItem("jwt");
     window.location.href = "/";
   };
-  console.log("Logged out")
 
   return (
     <a href="/" onClick={handleClick}>

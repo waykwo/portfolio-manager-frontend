@@ -12,26 +12,20 @@ export function PortfolioPage() {
   const [currentTransaction, setCurrentTransaction] = useState({});
 
   const handleIndex = () => {
-    console.log("handleIndex");
     axios.get("http://localhost:3000/transactions.json").then((response) => {
-      console.log("Transactions");
-      console.log(response.data);
       setTransactions(response.data);
     });
   };
 
   const handleCreate = (params, successCallback) => {
-    console.log("handleCreate", params);
     axios.post("http://localhost:3000/transactions.json", params).then((response) => {
       setTransactions([...transactions, response.data]);
-      console.log(response.data);
       successCallback();
       setIsTransactionNewVisible(false);
     });
   };
 
   const handleShow = (transaction) => {
-    console.log("handleShow", transaction);
     setIsTransactionShowVisible(true);
     setCurrentTransaction(transaction);
   };
@@ -41,13 +35,11 @@ export function PortfolioPage() {
   };
 
   const handleClose = () => {
-    console.log("handleClose");
     setIsTransactionShowVisible(false);
     setIsTransactionNewVisible(false);
   };
 
   const handleUpdate = (id, params, successCallback) => {
-    console.log("handleUpdate", params);
     axios.patch(`http://localhost:3000/transactions/${id}.json`, params).then((response) => {
       setTransactions(
         transactions.map((transaction) => {

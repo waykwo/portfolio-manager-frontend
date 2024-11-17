@@ -7,9 +7,7 @@ import axios from "axios";
 export function Header() {
   const [currentUser, setCurrentUser] = useState({});
   const getUserData = () => {
-    console.log("getting user data");
     axios.get("http://localhost:3000/users/current.json").then(response => {
-      console.log(response.data);
       setCurrentUser(response.data);
     })
   }
@@ -18,7 +16,6 @@ export function Header() {
 
   let authenticationLinks, user;
   if (localStorage.jwt === undefined) {
-    console.log("Logged out");
     authenticationLinks = (
       <div>
         {/* <a href="./LoginPage">Login</a> |&nbsp; */}
@@ -27,7 +24,6 @@ export function Header() {
       </div>
     )
   } else {
-    console.log("Logged in");
     user = <>Welcome, {currentUser.name}!</>
     authenticationLinks = (
       <LogoutLink />

@@ -11,9 +11,8 @@ export function SignupPage() {
     axios
       .post("http://localhost:3000/users.json", params)
       .then((response) => {
-        console.log(response.data);
         event.target.reset();
-        window.location.href = "/"; // Change this to hide a modal, redirect to a specific page, etc.
+        window.location.href = "/";
       })
       .catch((error) => {
         console.log(error.response.data.errors);
@@ -23,7 +22,7 @@ export function SignupPage() {
 
   return (
     <div id="signup">
-      <h3 className="text-3xl font-semibold m-8">Signup</h3>
+      <h3 className="text-2xl font-prata font-medium m-8">Signup</h3>
       <ul>
         {errors.map((error) => (
           <li key={error}>{error}</li>

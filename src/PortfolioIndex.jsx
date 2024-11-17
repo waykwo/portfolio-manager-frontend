@@ -3,7 +3,6 @@ import { PieChart } from "@mui/x-charts";
 import { blueberryTwilightPalette } from "@mui/x-charts";
 
 export function PortfolioIndex({ transactions, onShow }) {
-  console.log(transactions)
   const [selectedAssetClass, setSelectedAssetClass] = useState('All');
 
   function titleCase(str) {
@@ -55,9 +54,6 @@ export function PortfolioIndex({ transactions, onShow }) {
   const totalsJson = JSON.stringify(totalsByClass, null, 2);
   const gainLossJson = JSON.stringify(gainLossByClass, null, 2);
   const percentagesJson = JSON.stringify(percentagesByClass, null, 2);
-  console.log(totalsJson);
-  console.log(gainLossJson);
-  console.log(percentagesJson);
 
   // Parse the JSON
   const parsedTotals = JSON.parse(totalsJson);

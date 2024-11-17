@@ -30,7 +30,7 @@ export function LoginPage() {
 
   return (
     <div id="login">
-      <h3 className="text-3xl font-semibold m-8 mb-2">Login</h3>
+      <h3 className="text-2xl font-prata font-medium m-8 mb-2">Login</h3>
       <ul>
         {errors.map((error) => (
           <li key={error}>{error}</li>
