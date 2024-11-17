@@ -82,7 +82,7 @@ export function TransactionNew({ onCreate }) {
             </div>
           )}
           {selectedAsset && (
-            <div className="mt-2 m-8 text-indigo-700">
+            <div className="mb-5 ml-48 mt-2 text-indigo-700">
               {selectedAsset.ticker} - {selectedAsset.name}
               <button
                 type="button"

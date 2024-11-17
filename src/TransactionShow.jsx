@@ -10,10 +10,8 @@ export function TransactionShow({ transaction, onUpdate }) {
   return (
     <div>
       <h1 className="font-medium text-6xl m-8">{transaction.asset_name}</h1>
-      <div>
-        <label>Ticker</label>
-        <div>{transaction.asset_ticker}</div>
-      </div>
+      <h2 className="text-xl ml-8 -mt-5 mb-5">{transaction.asset_ticker}</h2>
+
       <div>
         <label>Shares</label>
         <div>{transaction.shares}</div>

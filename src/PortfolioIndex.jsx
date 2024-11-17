@@ -4,12 +4,11 @@ import { blueberryTwilightPalette } from "@mui/x-charts";
 
 export function PortfolioIndex({ transactions, onShow }) {
   console.log(transactions)
+  const [selectedAssetClass, setSelectedAssetClass] = useState('All');
 
   function titleCase(str) {
     return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   }
-
-  const [selectedAssetClass, setSelectedAssetClass] = useState('All');
 
   // Calculate portfolio total
   const total = transactions.reduce((sum, transaction) => {
@@ -172,8 +171,10 @@ export function PortfolioIndex({ transactions, onShow }) {
         </table>
       </div>
 
+      <hr className="border-slate-300" />
+
       <div className="grid grid-rows-2 grid-flow-col-dense">
-        <div className="row-span-4 mt-16">
+        <div className="row-span-4 mt-10">
           <PieChart
             colors={blueberryTwilightPalette}
             series={[
@@ -185,8 +186,8 @@ export function PortfolioIndex({ transactions, onShow }) {
                 faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
               },
             ]}
-            width={600}
-            height={350}
+            width={720}
+            height={480}
           />
         </div>
 

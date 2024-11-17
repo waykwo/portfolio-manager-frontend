@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        raleway: ['Raleway', 'Helvetica', 'Arial', 'sans-serif']
+        raleway: ['Raleway', 'Helvetica', 'Arial', 'sans-serif'],
+        prata: ['Prata', 'Baskerville', 'serif']
       },
     },
   },
